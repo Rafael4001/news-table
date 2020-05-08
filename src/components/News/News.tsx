@@ -12,10 +12,15 @@ import { getCountryName } from '../../utilities'
 
 
 const News = () => {
+  const countryLocalStorage = localStorage.getItem("country") || COUNTRIES[0].value
+  const pageSize = localStorage.getItem("pageSize") || RESULTS_AMOUNT_OPTIONS[0].value
+  const pageSizeLocalStorage = Number(pageSize);
+
+
   const [articles, setArticles] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  const [country, setCountry] = useState(COUNTRIES[0].value);
-  const [resultsAmount, setResultsAmount] = useState(RESULTS_AMOUNT_OPTIONS[0].value);
+  const [country, setCountry] = useState(countryLocalStorage);
+  const [resultsAmount, setResultsAmount] = useState(pageSizeLocalStorage);
 
 
   useEffect(() => {
@@ -38,11 +43,13 @@ const News = () => {
 
 
   const handleResultsAmountChange = async (value: any) => {
+    localStorage.setItem('pageSize', value)
     await setResultsAmount(value);
     await fetchData();
   }
 
   const handleCountryChange = async (country: string) => {
+    localStorage.setItem('country', country)
     await setCountry(country);
     await fetchData();
   }
