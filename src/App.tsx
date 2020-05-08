@@ -6,7 +6,6 @@ import News from './components/News'
 function App() {
   return (
     <div className={"App"}>
-      App
       <News/>
     </div>
   );
