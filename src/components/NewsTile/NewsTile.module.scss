@@ -6,11 +6,38 @@ $grey: #afadad;
   border: 1px solid $grey;
   padding: 0.5rem;
   position: relative;
+  text-decoration: none;
+  color: black;
+
+  a {
+    :link {
+      color: inherit;
+    }
+    :visited {
+      color: inherit
+    }
+    :hover {
+      color: inherit;
+      cursor: default;
+    }
+    :active {
+      color: inherit;
+    }
+  }
 
   .imageContainer {
     img {
       max-width: 100%;
       height: 15rem;
+      transition: transform 0.2s;
+      transform: scale(1);
+    }
+  }
+
+  :hover {
+    img {
+      transition: transform 0.2s;
+      transform: scale(1.01);
     }
   }
 

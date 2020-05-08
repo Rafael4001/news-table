@@ -23,6 +23,7 @@ const NewsTileList = (props: any) => {
             data={news.publishedAt}
             description={news.description}
             image={news.urlToImage}
+            url={news.url}
           />
         </li>
       )
