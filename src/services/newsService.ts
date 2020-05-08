@@ -10,11 +10,15 @@ const getData = (response: AxiosResponse) => {
 };
 
 export const getNews = async (country: string) => {
+  const yyy = country
+  console.log("yyy", yyy)
 
+
+  // const API_URL = `${API}/top-headlines?country=${country}&category=technology&apiKey=${API_KEY}`;
   const API_URL = `${API}/top-headlines?country=${country}&category=technology&apiKey=${API_KEY}`;
 
 
-  console.log('country', country)
+  console.log('API_URL', API_URL)
 
   try {
     const response =

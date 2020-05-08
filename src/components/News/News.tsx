@@ -6,27 +6,9 @@ import NewsTileList from '../NewsTileList'
 
 import styles from './News.module.scss';
 
-import { COUNTRIES_DETAILS, COUNTRIES } from '../../constants'
+import { COUNTRIES, RESULTS_AMOUNT_OPTIONS } from '../../constants'
 
-
-const getCountryName = (countryCode: string) => {
-  switch (countryCode) {
-    case COUNTRIES_DETAILS.pl.code:
-      return COUNTRIES_DETAILS.pl.name;
-    case COUNTRIES_DETAILS.de.code:
-      return COUNTRIES_DETAILS.de.name;
-    case COUNTRIES_DETAILS.cz.code:
-      return COUNTRIES_DETAILS.cz.name;
-  }
-
-}
-
-const RESULTS_AMOUNT_OPTIONS = [
-  {name: "10", value: 10},
-  {name: "20", value: 20},
-  {name: "50", value: 50},
-  {name: "100", value: 100},
-]
+import { getCountryName } from '../../utilities'
 
 
 const News = () => {
@@ -37,6 +19,10 @@ const News = () => {
 
 
   useEffect(() => {
+    fetchData()
+  }, [isFetching])
+
+  const fetchData = () => {
     setIsFetching(true)
 
     const leadData = async () => {
@@ -48,16 +34,16 @@ const News = () => {
     leadData();
 
     return setIsFetching(false)
-  }, [isFetching])
+  }
 
 
   const handleResultsAmountChange = (value: any) => (   // TODO set correct type
     setResultsAmount(value)
   )
 
-  const handleCountryChange = (country: string) => {
-    setCountry(country)
-
+  const handleCountryChange = async (country: string) => {
+    await setCountry(country)
+    await fetchData()
   }
 
   const getFilters = () => (
@@ -99,7 +85,7 @@ const News = () => {
 
       <div>
         {/*TODO poprawić, nazwe kraju odpowiednie tlumaczenie*/}
-        Wyświetlono: {articles.length} najnowszych wiadomości dla kracu: <strong>{getCountryName(country)}</strong>
+        Wyświetlono: {articles.length} najnowszych wiadomości dla kraju: <strong>{getCountryName(country)}</strong>
 
         <ul className={styles.newsListContainer}>
           <NewsTileList newsList={articles}/>

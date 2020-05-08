@@ -1,6 +1,6 @@
 .wrapperContainer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 11rem 1fr;
 
   ul {
     list-style-type: none;
@@ -8,7 +8,6 @@
 }
 
 .filtersContainer {
-  width: 35rem;
   padding: 1rem 0.5rem;
   display: flex;
   flex-direction: column;
