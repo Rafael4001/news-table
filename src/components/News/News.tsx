@@ -1,108 +1,36 @@
-import React, { useEffect, useState } from 'react';
-
-import { getNews } from '../../services/newsService'
+import React from 'react';
+import { BaseDetailsContext } from '../../store/BaseDetails/BaseDetails'
 
 import NewsTileList from '../NewsTileList'
+import Filters from './Filters'
 
 import styles from './News.module.scss';
-
-import { COUNTRIES, RESULTS_AMOUNT_OPTIONS } from '../../constants'
 
 import { getCountryName } from '../../utilities'
 
 
-const News = () => {
-  const countryLocalStorage = localStorage.getItem("country") || COUNTRIES[0].value
-  const pageSize = localStorage.getItem("pageSize") || RESULTS_AMOUNT_OPTIONS[0].value
-  const pageSizeLocalStorage = Number(pageSize);
+const News = () => (
+  <BaseDetailsContext.Consumer>
+    {(value) => {
+      return (
+        <div className={styles.wrapperContainer}>
+          <div className={styles.filtersContainer}>
+            <Filters/>
+          </div>
 
-  const [articles, setArticles] = useState([]);
-  const [isFetching, setIsFetching] = useState(true);
-  const [country, setCountry] = useState(countryLocalStorage);
-  const [resultsAmount, setResultsAmount] = useState(pageSizeLocalStorage);
+          <div>
+            Wyświetlono: <strong>{value?.resultsAmount}</strong> najnowszych wiadomości dla
+            kraju: <strong>{getCountryName(value?.country)}</strong>
 
-
-  useEffect(() => {
-    fetchData()
-  }, [isFetching])
-
-  const fetchData = () => {
-    setIsFetching(true)
-
-    const leadData = async () => {
-      const articles = await getNews(country, resultsAmount);
-      if (isFetching) {
-        setArticles(articles)
-      }
-    };
-    leadData();
-
-    return setIsFetching(false)
-  }
-
-
-  const handleResultsAmountChange = async (value: any) => {
-    localStorage.setItem('pageSize', value)
-    await setResultsAmount(value);
-    await fetchData();
-  }
-
-  const handleCountryChange = async (country: string) => {
-    localStorage.setItem('country', country)
-    await setCountry(country);
-    await fetchData();
-  }
-
-  const getFilters = () => (
-    <>
-      <div className={styles.inputContainer}>
-        <label htmlFor="name" className={styles.labelContainer}>Kraj: </label>
-        <select
-          id="country"
-          name="country"
-          onChange={(event) => handleCountryChange(event.target.value)}
-          value={country}
-        >
-          {COUNTRIES.map((country) => (
-            <option key={country.name} value={country.value}>{country.name}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className={styles.inputContainer}>
-        <label htmlFor="name" className={styles.labelContainer}>Wyświetl: </label>
-        <select
-          id="resultsAmount"
-          name="resultsAmount"
-          onChange={(event) => handleResultsAmountChange(event.target.value)}
-          value={resultsAmount}
-        >
-          {RESULTS_AMOUNT_OPTIONS.map((amount) => (
-            <option key={amount.name} value={amount.value}>{amount.name}</option>
-          ))}
-        </select>
-      </div>
-    </>
-  )
-
-  return (
-    <div className={styles.wrapperContainer}>
-      <div className={styles.filtersContainer}>
-        {getFilters()}
-      </div>
-
-      <div>
-        Wyświetlono: <strong>{resultsAmount}</strong> najnowszych wiadomości dla
-        kraju: <strong>{getCountryName(country)}</strong>
-
-        <ul className={styles.newsListContainer}>
-          <NewsTileList newsList={articles}/>
-        </ul>
-      </div>
-    </div>
-  )
-}
-
+            <ul className={styles.newsListContainer}>
+              <NewsTileList newsList={value?.articles}/>
+            </ul>
+          </div>
+        </div>
+      )
+    }}
+  </BaseDetailsContext.Consumer>
+)
 News.displayName = "News";
 
 export default News

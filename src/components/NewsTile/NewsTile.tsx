@@ -1,19 +1,23 @@
 import React, { FC } from 'react';
 import moment from 'moment';
-// import { INewsTileList } from './NewsTileList.types'
+import { INewsTile } from './NewsTile.types'
 
 import styles from './NewsTile.module.scss';
 
 
 const DATA_FORMAT = "DD/MM/YYYY HH:MM";
 
-// const NewsTile: FC<IINewsTileUser> = ({table}) => {
-const NewsTile = (props: any) => {
-  const {title, data, description, image, url} = props
+
+const NewsTile: FC<INewsTile> = ({
+                                   title,
+                                   data,
+                                   description,
+                                   image,
+                                   url
+                                 }) => {
   const dateString = moment(data).format(DATA_FORMAT);
 
-
-  //TODO poprawić style, dorównać do siebie kafelki
+  //TODO poprawić style, dorównać do siebie kafelki, oraz zrobic przycinanie tekstu
 
   return (
     <a
@@ -28,7 +32,6 @@ const NewsTile = (props: any) => {
         <div className={styles.detailsContainer}>
           <h4 className={styles.title}>{title}</h4>
           <div className={styles.contentContainer}>{description}</div>
-
           <div className={styles.dateContainer}>{dateString}</div>
         </div>
       </div>

@@ -13,11 +13,6 @@ export const getNews = async (country: string, pageSize: number = 20) => {
   try {
     const response =
       await axios.get(API_URL)
-        // TODO To ponizej do wykasowania
-        .then((res) => {
-          console.log('res', res)
-          return res
-        })
         .then(getData)
         .then((res) => (res))
     return response
