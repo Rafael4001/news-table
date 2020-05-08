@@ -14,7 +14,7 @@ const NewsTile = (props: any) => {
   const {title, data, description, image, url} = props
   const dateString = moment(data).format(DATA_FORMAT);
 
-  //TODO poprawić style, dorównać do siebie kafelki
+  //TODO poprawić style, dorównać do siebie kafelki, oraz zrobic przycinanie tekstu
 
   return (
     <a

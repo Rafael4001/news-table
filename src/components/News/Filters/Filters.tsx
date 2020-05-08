@@ -1,7 +1,10 @@
 import React from 'react';
+
 import styles from "../News.module.scss";
+
 import { COUNTRIES, RESULTS_AMOUNT_OPTIONS } from "../../../constants";
 import { BaseDetailsContext } from '../../../store/BaseDetails/BaseDetails'
+
 
 const Filters = () => (
   <BaseDetailsContext.Consumer>
