@@ -1,6 +1,6 @@
 import { COUNTRIES_DETAILS } from "./constants";
 
-export const getCountryName = (countryCode: string) => {
+export const getCountryName = (countryCode: string | undefined) => {
   switch (countryCode) {
     case COUNTRIES_DETAILS.pl.code:
       return COUNTRIES_DETAILS.pl.name;

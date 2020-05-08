@@ -7,11 +7,12 @@ import styles from './NewsTile.module.scss';
 
 const DATA_FORMAT = "DD/MM/YYYY HH:MM";
 
+
+// TODO określic interface
 // const NewsTile: FC<IINewsTileUser> = ({table}) => {
 const NewsTile = (props: any) => {
   const {title, data, description, image, url} = props
   const dateString = moment(data).format(DATA_FORMAT);
-
 
   //TODO poprawić style, dorównać do siebie kafelki
 
@@ -28,7 +29,6 @@ const NewsTile = (props: any) => {
         <div className={styles.detailsContainer}>
           <h4 className={styles.title}>{title}</h4>
           <div className={styles.contentContainer}>{description}</div>
-
           <div className={styles.dateContainer}>{dateString}</div>
         </div>
       </div>
