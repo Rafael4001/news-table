@@ -8,6 +8,7 @@ $grey: #afadad;
   position: relative;
   text-decoration: none;
   color: black;
+  cursor: default;
 
   a {
     :link {
@@ -18,7 +19,6 @@ $grey: #afadad;
     }
     :hover {
       color: inherit;
-      cursor: default;
     }
     :active {
       color: inherit;
