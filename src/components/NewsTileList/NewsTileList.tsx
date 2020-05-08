@@ -12,7 +12,6 @@ const NO_RESULTS_TEXT = "no results";
 // const NewsTile: FC<IINewsTileUser> = ({table}) => {  // TODO prepere this line
 const NewsTileList = (props: any) => {
   const {newsList} = props
-  console.log('newsList', newsList)
 
   if (newsList.length) {
     const usersList = newsList.map((news: any, id: number) => { //TODO correct type news
