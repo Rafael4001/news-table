@@ -12,6 +12,7 @@ const COUNTRIES = [
   {name: "Niemcy", value: "germany"},
   {name: "Czechy", value: "czechRepublic"}
 ]
+
 const RESULTS_AMOUNT_OPTIONS = [
   {name: "10", value: 10},
   {name: "20", value: 20},
@@ -23,7 +24,7 @@ const RESULTS_AMOUNT_OPTIONS = [
 const News = () => {
   const [articles, setArticles] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  const [country, setCountry] = useState("poland");
+  const [country, setCountry] = useState(COUNTRIES[0].value);
   const [resultsAmount, setResultsAmount] = useState(0);
 
 
@@ -47,9 +48,9 @@ const News = () => {
   )
 
   const getFilters = () => (
-    <div>
-      <div>
-        <label htmlFor="name">Kraj: </label>
+    <div className={styles.filtersContainer}>
+      <div className={styles.inputContainer}>
+        <label htmlFor="name" className={styles.labelContainer}>Kraj: </label>
         <select
           id="country"
           name="country"
@@ -62,8 +63,8 @@ const News = () => {
         </select>
       </div>
 
-      <div>
-        <label htmlFor="name">Wyświetl: </label>
+      <div className={styles.inputContainer}>
+        <label htmlFor="name" className={styles.labelContainer}>Wyświetl: </label>
         <select
           id="resultsAmount"
           name="resultsAmount"
@@ -85,11 +86,14 @@ const News = () => {
       {/*TODO to correction multiselect*/}
       {getFilters()}
 
-      {/*TODO poprawić*/}
-      Wyświetlono: {articles.length} najnowszych wiadomości dla kracu: {country}
+      <div>
+        {/*TODO poprawić, nazwe kraju odpowiednie tlumaczenie*/}
+        Wyświetlono: {articles.length} najnowszych wiadomości dla kracu: <strong>{country}</strong>
 
-
-      {/*<NewsTileList newsList={articles}/>*/}
+        <ul>
+          <NewsTileList newsList={articles}/>
+        </ul>
+      </div>
     </div>
   )
 }
