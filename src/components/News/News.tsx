@@ -16,7 +16,6 @@ const News = () => {
   const pageSize = localStorage.getItem("pageSize") || RESULTS_AMOUNT_OPTIONS[0].value
   const pageSizeLocalStorage = Number(pageSize);
 
-
   const [articles, setArticles] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [country, setCountry] = useState(countryLocalStorage);
@@ -88,13 +87,11 @@ const News = () => {
 
   return (
     <div className={styles.wrapperContainer}>
-      {/*TODO to correction multiselect*/}
       <div className={styles.filtersContainer}>
         {getFilters()}
       </div>
 
       <div>
-        {/*TODO poprawić, nazwe kraju odpowiednie tlumaczenie*/}
         Wyświetlono: <strong>{resultsAmount}</strong> najnowszych wiadomości dla
         kraju: <strong>{getCountryName(country)}</strong>
 
