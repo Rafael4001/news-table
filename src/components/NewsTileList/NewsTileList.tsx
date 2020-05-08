@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { INewsTileList } from './NewsTileList.types'
+import { INewsTileList, INewsList } from './NewsTileList.types'
 
 import NewsTile from '../NewsTile'
 
@@ -9,24 +9,20 @@ import styles from './NewsTileList.module.scss';
 const NO_RESULTS_TEXT = "no results";
 
 
-// const NewsTile: FC<IINewsTileUser> = ({table}) => {  // TODO prepere this line
-const NewsTileList = (props: any) => {
-  const {newsList} = props
+const NewsTileList: FC<INewsTileList> = ({newsList}) => {
 
-  if (newsList.length) {
-    const usersList = newsList.map((news: any, id: number) => { //TODO correct type news
-      return (
-        <li key={id}>
-          <NewsTile
-            title={news.title}
-            data={news.publishedAt}
-            description={news.description}
-            image={news.urlToImage}
-            url={news.url}
-          />
-        </li>
-      )
-    })
+  if (newsList?.length) {
+    const usersList = newsList.map((news: INewsList, id: number) => (
+      <li key={id}>
+        <NewsTile
+          title={news.title}
+          data={news.publishedAt}
+          description={news.description}
+          image={news.urlToImage}
+          url={news.url}
+        />
+      </li>
+    ))
 
     return (
       <div className={styles.newsListContainer}>

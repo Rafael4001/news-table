@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import moment from 'moment';
-// import { INewsTileList } from './NewsTileList.types'
+import { INewsTile } from './NewsTile.types'
 
 import styles from './NewsTile.module.scss';
 
@@ -8,10 +8,13 @@ import styles from './NewsTile.module.scss';
 const DATA_FORMAT = "DD/MM/YYYY HH:MM";
 
 
-// TODO określic interface
-// const NewsTile: FC<IINewsTileUser> = ({table}) => {
-const NewsTile = (props: any) => {
-  const {title, data, description, image, url} = props
+const NewsTile: FC<INewsTile> = ({
+                                   title,
+                                   data,
+                                   description,
+                                   image,
+                                   url
+                                 }) => {
   const dateString = moment(data).format(DATA_FORMAT);
 
   //TODO poprawić style, dorównać do siebie kafelki, oraz zrobic przycinanie tekstu

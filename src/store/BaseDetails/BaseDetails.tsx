@@ -25,8 +25,8 @@ const BaseDetails = (props: any) => {
     await fetchData();
   }
 
-  const handleResultsAmountChange = async (value: any) => {
-    localStorage.setItem('pageSize', value)
+  const handleResultsAmountChange = async (value: number) => {
+    localStorage.setItem('pageSize', value.toString())
     await setResultsAmount(value);
     await fetchData();
   }
