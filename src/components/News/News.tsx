@@ -6,12 +6,20 @@ import NewsTileList from '../NewsTileList'
 
 import styles from './News.module.scss';
 
+import { COUNTRIES_DETAILS, COUNTRIES } from '../../constants'
 
-const COUNTRIES = [
-  {name: "Polska", value: "poland"},
-  {name: "Niemcy", value: "germany"},
-  {name: "Czechy", value: "czechRepublic"}
-]
+
+const getCountryName = (countryCode: string) => {
+  switch (countryCode) {
+    case COUNTRIES_DETAILS.pl.code:
+      return COUNTRIES_DETAILS.pl.name;
+    case COUNTRIES_DETAILS.de.code:
+      return COUNTRIES_DETAILS.de.name;
+    case COUNTRIES_DETAILS.cz.code:
+      return COUNTRIES_DETAILS.cz.name;
+  }
+
+}
 
 const RESULTS_AMOUNT_OPTIONS = [
   {name: "10", value: 10},
@@ -25,14 +33,14 @@ const News = () => {
   const [articles, setArticles] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [country, setCountry] = useState(COUNTRIES[0].value);
-  const [resultsAmount, setResultsAmount] = useState(0);
+  const [resultsAmount, setResultsAmount] = useState(RESULTS_AMOUNT_OPTIONS[0].value);
 
 
   useEffect(() => {
     setIsFetching(true)
 
     const leadData = async () => {
-      const articles = await getNews();
+      const articles = await getNews(country);
       if (isFetching) {
         setArticles(articles)
       }
@@ -47,6 +55,11 @@ const News = () => {
     setResultsAmount(value)
   )
 
+  const handleCountryChange = (country: string) => {
+    setCountry(country)
+
+  }
+
   const getFilters = () => (
     <div className={styles.filtersContainer}>
       <div className={styles.inputContainer}>
@@ -54,7 +67,7 @@ const News = () => {
         <select
           id="country"
           name="country"
-          onChange={(event) => setCountry(event.target.value)}
+          onChange={(event) => handleCountryChange(event.target.value)}
           value={country}
         >
           {COUNTRIES.map((country) => (
@@ -68,7 +81,6 @@ const News = () => {
         <select
           id="resultsAmount"
           name="resultsAmount"
-          // onChange={(event) => setResultsAmount(event.target.value)}
           onChange={(event) => handleResultsAmountChange(event.target.value)}
           value={resultsAmount}
         >
@@ -80,7 +92,6 @@ const News = () => {
     </div>
   )
 
-
   return (
     <div className={styles.wrapperContainer}>
       {/*TODO to correction multiselect*/}
@@ -88,9 +99,9 @@ const News = () => {
 
       <div>
         {/*TODO poprawić, nazwe kraju odpowiednie tlumaczenie*/}
-        Wyświetlono: {articles.length} najnowszych wiadomości dla kracu: <strong>{country}</strong>
+        Wyświetlono: {articles.length} najnowszych wiadomości dla kracu: <strong>{getCountryName(country)}</strong>
 
-        <ul>
+        <ul className={styles.newsListContainer}>
           <NewsTileList newsList={articles}/>
         </ul>
       </div>

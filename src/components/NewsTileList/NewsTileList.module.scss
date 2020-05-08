@@ -1,3 +1,10 @@
 .noResultText {
   color: red;
 }
+
+.newsListContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0.5rem;
+
+}

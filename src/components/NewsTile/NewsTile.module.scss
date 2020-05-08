@@ -1,0 +1,39 @@
+$grey: #afadad;
+
+.NewsTile {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $grey;
+  padding: 0.5rem;
+  position: relative;
+
+  .imageContainer {
+    img {
+      max-width: 100%;
+      height: 15rem;
+    }
+  }
+
+  .detailsContainer {
+    .title {
+      font-size: 1rem;
+      margin: 0.1875rem;
+    }
+
+    .contentContainer {
+      font-size: 0.8125rem;
+      font-family: Arial;
+      display: flex;
+      text-align: left;
+      padding: 0.1875rem;
+    }
+
+    .dateContainer {
+      margin-top: 1rem;
+      font-size: 0.8125rem;
+      text-align: end;
+      color: $grey;
+    }
+  }
+}
+

@@ -18,16 +18,21 @@ const NewsTileList = (props: any) => {
     const usersList = newsList.map((news: any, id: number) => { //TODO correct type news
       return (
         <li key={id}>
-          <span>{id + 1}. </span>
           <NewsTile
             title={news.title}
             data={news.publishedAt}
             description={news.description}
+            image={news.urlToImage}
           />
         </li>
       )
     })
-    return <div>{usersList}</div>
+
+    return (
+      <div className={styles.newsListContainer}>
+        {usersList}
+      </div>
+    )
 
   } else {
     return <span className={styles.noResultText}>{NO_RESULTS_TEXT}</span>
