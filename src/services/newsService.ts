@@ -9,20 +9,16 @@ const getData = (response: AxiosResponse) => {
   return response.data?.articles;
 };
 
-export const getNews = async (country: string) => {
-  const yyy = country
-  console.log("yyy", yyy)
-
-
-  // const API_URL = `${API}/top-headlines?country=${country}&category=technology&apiKey=${API_KEY}`;
-  const API_URL = `${API}/top-headlines?country=${country}&category=technology&apiKey=${API_KEY}`;
-
-
-  console.log('API_URL', API_URL)
+export const getNews = async (country: string, pageSize: number = 20) => {
+  const API_URL = `${API}/top-headlines?country=${country}&category=technology&pageSize=${pageSize}&apiKey=${API_KEY}`;
 
   try {
     const response =
       await axios.get(API_URL)
+        .then((res) => {
+          console.log('res', res)
+          return res
+        })
         .then(getData)
         .then((res) => (res))
     return response

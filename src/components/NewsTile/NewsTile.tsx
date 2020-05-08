@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-
+import moment from 'moment';
 // import { INewsTileList } from './NewsTileList.types'
 
 import styles from './NewsTile.module.scss';
@@ -8,8 +8,8 @@ import styles from './NewsTile.module.scss';
 // const NewsTile: FC<IINewsTileUser> = ({table}) => {
 const NewsTile = (props: any) => {
   const {title, data, description, image} = props
-  const date = new Date(data)
-  const dateString = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()}`
+  const dateString = moment(data).format("DD/MM/YYYY HH:MM");
+
 
   //TODO poprawić style, dorównać do siebie kafelki
   //TODO Linki zapiąć w kafelkach i zrobić hover

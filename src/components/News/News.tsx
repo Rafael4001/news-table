@@ -26,7 +26,7 @@ const News = () => {
     setIsFetching(true)
 
     const leadData = async () => {
-      const articles = await getNews(country);
+      const articles = await getNews(country, resultsAmount);
       if (isFetching) {
         setArticles(articles)
       }
@@ -37,17 +37,18 @@ const News = () => {
   }
 
 
-  const handleResultsAmountChange = (value: any) => (   // TODO set correct type
-    setResultsAmount(value)
-  )
+  const handleResultsAmountChange = async (value: any) => {
+    await setResultsAmount(value);
+    await fetchData();
+  }
 
   const handleCountryChange = async (country: string) => {
-    await setCountry(country)
-    await fetchData()
+    await setCountry(country);
+    await fetchData();
   }
 
   const getFilters = () => (
-    <div className={styles.filtersContainer}>
+    <>
       <div className={styles.inputContainer}>
         <label htmlFor="name" className={styles.labelContainer}>Kraj: </label>
         <select
@@ -75,17 +76,20 @@ const News = () => {
           ))}
         </select>
       </div>
-    </div>
+    </>
   )
 
   return (
     <div className={styles.wrapperContainer}>
       {/*TODO to correction multiselect*/}
-      {getFilters()}
+      <div className={styles.filtersContainer}>
+        {getFilters()}
+      </div>
 
       <div>
         {/*TODO poprawić, nazwe kraju odpowiednie tlumaczenie*/}
-        Wyświetlono: {articles.length} najnowszych wiadomości dla kraju: <strong>{getCountryName(country)}</strong>
+        Wyświetlono: <strong>{resultsAmount}</strong> najnowszych wiadomości dla
+        kraju: <strong>{getCountryName(country)}</strong>
 
         <ul className={styles.newsListContainer}>
           <NewsTileList newsList={articles}/>
