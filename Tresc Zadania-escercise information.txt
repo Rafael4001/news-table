@@ -1,0 +1,43 @@
+Założenia wstępne:
+zadanie nie powinno zająć więcej niż 4h (gdybyś szacował na więcej, prośba o informację, ustalimy z czego zrezygnować)
+wynik zadania można przesłać w postaci paczki kodu (bez vendorów), lub udostępnić gdzieś w repozytorium (github, gitlab, itp.)
+
+Wymagania techniczne:
+				apka z użyciem endpointu jako źródło danych: https://newsapi.org/docs/endpoints/top-headlines
+				Do zarządzania stanem można użyć Redux lub Context API
+				Nie korzystamy z gotowych frameworków UI, style mają być napisane od zera z użyciem dowolnego preprocessora
+
+
+
+
+!!!!!!!!!!!!!!!!!!! tutaj sie nie dostosowałem
+Aplikacja powinna być stworzona od zera z użyciem Webpacka, nie korzystamy z create-react-app
+
+
+
+
+Opis zadania:
+Aplikacja będzie służyć do pobierania najnowszych wiadomości.
+
+
+
+
+		Aplikacja będzie zawierać dwa filtry:
+					- Kraj (country), niech będzie Polska, Czechy, Niemcy (defaultowo Polska)
+					- Wyników na stronie (pageSize), 10, 20, 50, 100 (defaultowo 10).
+
+					Wybór filtrów ma być zapamiętany i przechowywany w localStorage.
+
+					Nad listingiem newsów powinien być pokazany tytuł "Wyświetlono [pageSize] najnowszych wiadomości dla kraju: [country]"
+
+					Newsy powinny być zaprezentowane w wierszach dwu kolumnowych w formie "kafelka" - czyli blok ze zdjęciem, na którym wyświetlimy:
+					- tytuł
+					- data
+- zajawka 60 znaków z końcówką … jeśli content jest dłuższy od zajawki (nie przycinamy wyrazów!)
+					-każdy kafelek ma być podlinkowany do newsa i otwierany w nowym oknie.
+
+
+
+
+
+
